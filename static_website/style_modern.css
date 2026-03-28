@@ -1,0 +1,704 @@
+/* Custom styles for modern UI */
+
+:root {
+    /* 全局默认色（不直接用，具体主题会覆盖） */
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+}
+
+/* 浅色默认主题 */
+body.theme-modern,
+body.theme-light {
+    --primary-color: #667eea;
+    --primary-hover: #5568d3;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --info-color: #0dcaf0;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --input-bg: #ffffff;
+    --hover-bg: rgba(102, 126, 234, 0.1);
+
+    background-color: #f8f9fa;
+    color: var(--text-color);
+}
+
+body.theme-modern .card,
+body.theme-light .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+body.theme-modern .card-header,
+body.theme-light .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: none;
+}
+
+body.theme-modern .card-header.text-white,
+body.theme-light .card-header.text-white {
+    color: #fff !important;
+}
+
+body.theme-dark .card-header,
+body.theme-dark .card-header.text-white {
+    color: var(--text-color) !important;
+}
+
+body.theme-modern .text-muted,
+body.theme-light .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* 深色夜间主题 - 纯黑背景 + 深灰气泡框 */
+body.theme-dark {
+    --primary-color: #2d5a47;      /* 墨绿色 - 主色调 */
+    --primary-hover: #3d7a5f;       /* 墨绿色悬停 */
+    --secondary-color: #555555;     /* 中性灰 */
+    --success-color: #84cc16;       /* 黄绿色 */
+    --info-color: #22d3ee;         /* 青色（图表用） */
+    --warning-color: #facc15;      /* 黄色 */
+    --danger-color: #ef4444;       /* 红色 */
+    --light-color: #e2e8f0;        /* 浅灰 */
+    --dark-color: #000000;         /* 纯黑背景 */
+    --text-color: #e2e8f0;         /* 浅色文字 */
+    --text-muted: #888888;          /* 次要文字 */
+    --border-color: #2a2a2a;       /* 边框色 - 稍浅的灰 */
+    --card-bg: #1a1a1a;            /* 深灰卡片背景（气泡框） */
+    --input-bg: #1a1a1a;           /* 输入框背景 */
+    --hover-bg: rgba(45, 90, 71, 0.15); /* 悬停背景 */
+    --modal-bg: #111111;           /* 模态框背景 */
+
+    background-color: var(--dark-color);
+    color: var(--text-color);
+}
+
+body.theme-dark .card {
+    background-color: #111111;  /* 纯黑气泡框背景 */
+    border: 1px solid var(--border-color);
+}
+
+body.theme-dark .card-header {
+    background-color: #000000;  /* 纯黑标题栏 */
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.theme-dark .card-body {
+    color: var(--text-color);
+}
+
+body.theme-dark .text-muted {
+    color: var(--text-muted) !important;
+}
+
+body.theme-dark .form-control,
+body.theme-dark .form-select {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+}
+
+body.theme-dark .form-control:focus,
+body.theme-dark .form-select:focus {
+    background-color: var(--input-bg);
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(45, 90, 71, 0.4);
+}
+
+body.theme-dark .form-control::placeholder {
+    color: var(--text-muted);
+}
+
+body.theme-dark .nav-tabs {
+    border-bottom: 1px solid var(--border-color);
+    background-color: #0a0a0a;
+}
+
+body.theme-dark .nav-tabs .nav-link {
+    color: var(--text-muted);
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+}
+
+body.theme-dark .nav-tabs .nav-link:hover {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+body.theme-dark .nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    background-color: transparent;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+body.theme-dark .navbar {
+    background-color: #000000 !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.theme-dark .navbar-dark .navbar-brand,
+body.theme-dark .navbar-dark .nav-link {
+    color: var(--text-color);
+}
+
+body.theme-dark .bg-primary {
+    background-color: #000000 !important;
+}
+
+body.theme-dark .btn-primary {
+    background: linear-gradient(135deg, #2d5a47 0%, #1e3d30 100%);
+    border: none;
+    color: #fff;
+}
+
+body.theme-dark .btn-primary:hover {
+    background: linear-gradient(135deg, #3d7a5f 0%, #2d5a47 100%);
+}
+
+body.theme-dark .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.theme-dark .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+body.theme-dark .btn-outline-info {
+    border-color: #84cc16;
+    color: #84cc16;
+}
+
+body.theme-dark .btn-outline-info:hover {
+    background-color: #84cc16;
+    color: #000000;
+}
+
+body.theme-dark .badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+body.theme-dark .modal-content {
+    background-color: #111111;
+    color: var(--text-color);
+}
+
+body.theme-dark .modal-header {
+    background-color: #0a0a0a;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.theme-dark .modal-footer {
+    border-top-color: var(--border-color);
+}
+
+body.theme-dark .dropdown-menu {
+    background-color: #1a1a1a;
+    border-color: var(--border-color);
+}
+
+body.theme-dark .dropdown-item {
+    color: var(--text-color);
+}
+
+body.theme-dark .dropdown-item:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+body.theme-dark #osmdContainer {
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+}
+
+body.theme-dark .osmd-system {
+    background-color: #ffffff;
+    border-color: var(--border-color);
+}
+
+body.theme-dark .osmd-system svg svg {
+    background-color: #ffffff;
+}
+
+/* Tempo Curve 图表容器 - 深色主题 */
+body.theme-dark #curveChartCard {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+}
+
+body.theme-dark #curveChartCard .card-header {
+    background-color: #0d0d0d;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.theme-dark #curveChartCard .card-body {
+    background-color: #1a1a1a;
+}
+
+/* Canvas 背景 - 深色主题（纯黑） */
+body.theme-dark #tempoCurveCanvas {
+    background-color: #000000;
+}
+
+body.theme-dark .minima-label {
+    fill: #84cc16;
+}
+
+body.theme-dark .annotation-marker {
+    fill: #22d3ee;
+}
+
+body.theme-dark .trend-line {
+    stroke: #84cc16;
+}
+
+body.theme-dark .trend-annotation {
+    fill: #84cc16;
+}
+
+body.theme-dark .modal-backdrop.show {
+    opacity: 0.85;
+}
+
+body.theme-dark ::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+}
+
+body.theme-dark ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+}
+
+body.theme-dark .modal-header .btn-close {
+    filter: invert(1) grayscale(100%);
+}
+
+body.theme-dark .table {
+    color: var(--text-color);
+}
+
+body.theme-dark hr {
+    border-color: var(--border-color);
+}
+
+/* 主要内容区域 - 深色主题 */
+body.theme-dark #mainContentCol {
+    background-color: #000000;
+}
+
+/* Tab 内容区域 */
+body.theme-dark .tab-content {
+    background-color: #000000;
+}
+
+/* 图表在深色模式下 */
+body.theme-dark canvas {
+    filter: drop-shadow(0 0 10px rgba(45, 90, 71, 0.3));
+}
+
+/* 主题切换按钮 */
+#themeToggleBtn {
+    border-radius: 20px;
+    padding: 4px 10px;
+    transition: all 0.3s ease;
+    pointer-events: auto !important;
+    cursor: pointer;
+    z-index: 1000;
+    position: relative;
+}
+
+#themeToggleBtn:hover {
+    transform: scale(1.1);
+}
+
+#themeToggleBtn * {
+    pointer-events: none;
+}
+
+body.theme-dark #themeToggleBtn {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body.theme-dark #themeToggleBtn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* 浅色模式下按钮样式 */
+body.theme-modern #themeToggleBtn,
+body.theme-light #themeToggleBtn {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #fff;
+}
+
+body.theme-modern #themeToggleBtn:hover,
+body.theme-light #themeToggleBtn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    /* 确保整个页面可以正常滚动 */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+html {
+    /* 确保HTML根元素支持滚动 */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Card enhancements */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+.card-header {
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    border-radius: 12px 12px 0 0 !important;
+    font-weight: 600;
+}
+
+/* Form controls */
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button enhancements */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
+}
+
+/* Range slider */
+.form-range {
+    cursor: pointer;
+}
+
+.form-range::-webkit-slider-thumb {
+    background-color: var(--primary-color);
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.form-range::-moz-range-thumb {
+    background-color: var(--primary-color);
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* OSMD Container */
+#osmdContainer {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+    overflow-y: visible; /* 让内容自然展开，不限制高度 */
+    height: auto; /* 让高度自适应内容 */
+    /* 允许整个页面滚动 */
+    position: relative;
+    max-height: none; /* 移除高度限制，让整个页面可以滚动 */
+}
+
+/* 确保系统容器不会阻止滚动 */
+.osmd-system {
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+    /* 防止系统容器影响父级滚动 */
+    overflow: visible;
+}
+
+/* 确保卡片内容区域支持滚动 */
+#score-pane .card-body {
+    overflow: visible;
+    max-height: none;
+}
+
+/* 去掉乐谱视图的大卡片边框，只为每个系统显示边框 */
+#score-pane .card {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+.osmd-system {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fff;
+}
+
+/* 让 OSMD 生成的 SVG 可以自适应容器宽度 */
+.osmd-system svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* 确保系统容器可以正常显示 */
+.osmd-system {
+    width: 100%;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Status messages */
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Minima markers（SVG 元素，具体位置由 JS 控制） */
+.minima-marker {
+    /* 不使用 position/动画，避免“晃动”，样式主要由 SVG 属性决定 */
+}
+
+.minima-label {
+    font-size: 11px;
+    font-weight: bold;
+    fill: #ff9800;
+}
+
+/* Annotation markers（SVG 文本） */
+.annotation-marker {
+    font-size: 11px;
+    font-weight: bold;
+    fill: #2196f3;
+}
+
+/* Chart container */
+#curveChartCard {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading spinner */
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3em;
+}
+
+/* Sidebar collapse */
+#sidebarCol.collapsed {
+    display: none !important;
+}
+
+#mainContentCol.expanded {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+/* Make sidebar more compact on larger screens */
+@media (min-width: 992px) {
+    #sidebarCol {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%;
+    }
+    
+    #mainContentCol {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%;
+    }
+}
+
+/* Chart container - larger height */
+#tempoCurveCanvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 600px;
+}
+
+/* Ensure chart container has proper height */
+#chart-pane .card-body {
+    min-height: 600px;
+}
+
+/* Tab styling */
+.nav-tabs {
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6c757d;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: rgba(13, 110, 253, 0.3);
+    color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Fullscreen modal for chart */
+#fullscreenChartModal .modal-dialog {
+    max-width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+#fullscreenChartModal .modal-content {
+    height: 100vh;
+    border-radius: 0;
+}
+
+#fullscreenChartModal .modal-body {
+    height: calc(100vh - 120px);
+    padding: 30px;
+    overflow: hidden;
+}
+
+#fullscreenChartCanvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .col-lg-2, .col-lg-10 {
+        margin-bottom: 20px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    #osmdContainer {
+        min-height: 300px !important;
+    }
+}
+
+/* Badge enhancements */
+.badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    font-size: 1.25rem;
+}
+
+/* Smooth transitions */
+* {
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Tooltip enhancements */
+.tooltip {
+    font-size: 12px;
+}
+
+/* Modal enhancements */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+    border-radius: 12px 12px 0 0;
+}
+
+/* Form text */
+.form-text {
+    font-size: 0.75rem;
+    color: #6c757d;
+}
+
+/* Icon spacing */
+.bi {
+    vertical-align: -0.125em;
+}
+
