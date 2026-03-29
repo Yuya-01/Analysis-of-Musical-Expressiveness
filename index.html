@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐表现力分析系统 - Expressiveness Analysis</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- OSMD CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/opensheetmusicdisplay@1.8.7/build/opensheetmusicdisplay.min.css"
+          onerror="this.onerror=null; this.href='osmd/opensheetmusicdisplay.min.css'">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style_modern.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-music-note-beamed me-2"></i>
+                <strong data-i18n="app_title">音乐表现力分析系统</strong>
+            </a>
+            <div class="d-flex align-items-center ms-auto">
+                <button class="btn btn-sm btn-outline-light me-2" id="themeToggleBtn" title="切换深色/浅色模式" data-i18n-attr="title" data-i18n="btn_toggle_theme">
+                    <i class="bi bi-moon-fill" id="themeIcon"></i>
+                </button>
+                <select id="langSelect" class="form-select form-select-sm" style="width:110px;">
+                    <option value="zh">中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#helpModal" data-i18n="nav_help">
+                            <i class="bi bi-question-circle me-1"></i><span data-i18n="nav_help_text">帮助</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Left Sidebar: Controls -->
+            <div class="col-lg-2 col-md-3 col-12 mb-4" id="sidebarCol">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-sliders me-2"></i><span data-i18n="label_analysis_settings">分析设置</span></h5>
+                    </div>
+                    <div class="card-body">
+                        <!-- File Input Section -->
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-3"><i class="bi bi-file-earmark-music me-2"></i><span data-i18n="label_file_selection">文件选择</span></h6>
+                            
+                            <div class="mb-3">
+                                <label class="form-label fw-bold" data-i18n="label_piece_preset">曲目预设</label>
+                                <select class="form-select form-select-sm" id="piecePreset">
+                                    <option value="" data-i18n="preset_manual">-- 手动选择 --</option>
+                                    <optgroup label="K.310 - Mozart Sonata 8-1 (第一乐章)">
+                                        <option value="asap_8_1_rozanski">Rozanski</option>
+                                        <option value="asap_8_1_bogdanovitch">Bogdanovitch</option>
+                                        <option value="asap_8_1_jia">Jia</option>
+                                        <option value="asap_8_1_lo">Lo</option>
+                                        <option value="asap_8_1_lee">Lee</option>
+                                        <option value="asap_8_1_midi">MIDI Score</option>
+                                    </optgroup>
+                                    <optgroup label="K.331 - Mozart Sonata 11-3 (第三乐章)">
+                                        <option value="asap_11_3_stahievitch">Stahievitch</option>
+                                        <option value="asap_11_3_midi">MIDI Score</option>
+                                    </optgroup>
+                                    <optgroup label="K.332 - Mozart Sonata 12-1 (第一乐章)">
+                                        <option value="asap_12_1_adig">Adig</option>
+                                        <option value="asap_12_1_muna">MunA</option>
+                                        <option value="asap_12_1_tet">TET</option>
+                                        <option value="asap_12_1_wuue">WuuE</option>
+                                        <option value="asap_12_1_midi">MIDI Score</option>
+                                    </optgroup>
+                                    <optgroup label="K.332 - Mozart Sonata 12-2 (第二乐章)">
+                                        <option value="asap_12_2_muna">MunA</option>
+                                        <option value="asap_12_2_wuue">WuuE</option>
+                                        <option value="asap_12_2_midi">MIDI Score</option>
+                                    </optgroup>
+                                    <optgroup label="K.332 - Mozart Sonata 12-3 (第三乐章)">
+                                        <option value="asap_12_3_blinov">Blinov</option>
+                                        <option value="asap_12_3_muna">MunA</option>
+                                        <option value="asap_12_3_wuue">WuuE</option>
+                                        <option value="asap_12_3_midi">MIDI Score</option>
+                                    </optgroup>
+                                </select>
+                                <small class="form-text text-muted" data-i18n="helper_preset">选择后自动加载预设数据</small>
+                            </div>
+                        </div>
+
+                        <!-- Level Control -->
+                        <div class="mb-4">
+                            <h6 class="text-muted mb-3"><i class="bi bi-layers me-2"></i><span data-i18n="label_hierarchy">层级选择</span></h6>
+                            <div id="levelControls">
+                                <input type="range" class="form-range" id="levelSlider" min="1" max="1" value="1">
+                                <div class="text-center">
+                                    <span class="badge bg-primary fs-6" id="levelDisplay">Level: 1</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Status Display -->
+                        <div id="status" class="alert alert-info d-none" role="alert"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content: Score and Chart -->
+            <div class="col-lg-10 col-md-9 col-12" id="mainContentCol">
+                <!-- Tabs for switching between Score and Chart -->
+                <ul class="nav nav-tabs mb-3" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="score-tab" data-bs-toggle="tab" data-bs-target="#score-pane" type="button" role="tab">
+                            <i class="bi bi-music-note-list me-2"></i><span data-i18n="label_score_view">乐谱视图</span>
+                        </button>
+                    </li>
+                    <!-- chart tab removed: curve shown inline under score -->
+                    <li class="nav-item ms-auto" role="presentation">
+                        <button class="btn btn-sm btn-outline-primary" id="fullscreenChartBtn" style="display: none;" data-i18n-attr="title" data-i18n="btn_fullscreen_title">
+                            <i class="bi bi-arrows-fullscreen me-1"></i><span data-i18n="btn_fullscreen">全屏</span>
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Score Tab -->
+                    <div class="tab-pane fade show active" id="score-pane" role="tabpanel">
+                        <div class="card shadow-sm">
+                            <div class="card-body p-3">
+                                <div id="osmdContainer" style="min-height: 500px; position: relative;"></div>
+                                <!-- Inline tempo curve card: moved here from chart tab to show under score -->
+                                <div class="card shadow-sm mt-3" id="curveChartCard">
+                                    <div class="card-header">
+                                        <h6 class="mb-0"><i class="bi bi-graph-up-arrow me-2"></i><span data-i18n="label_tempo_curve">速度曲线</span></h6>
+                                    </div>
+                                    <div class="card-body p-3">
+                                        <div style="position: relative; height: 160px;">
+                                            <canvas id="tempoCurveCanvas"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- chart pane removed -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="visually-hidden" data-i18n="loading">加载中...</span>
+                    </div>
+                    <h5 data-i18n="analyzing">正在分析...</h5>
+                    <p class="text-muted mb-0" id="loadingText" data-i18n="processing_request">请稍候，正在处理您的请求</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Chart Modal -->
+    <div class="modal fade" id="fullscreenChartModal" tabindex="-1" data-bs-backdrop="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-graph-up-arrow me-2"></i><span data-i18n="tempo_curve_fullscreen_title">速度曲线分析 - 全屏视图</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="fullscreenChartCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-question-circle me-2"></i><span data-i18n="nav_help">使用帮助</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6 data-i18n="features_title">功能说明</h6>
+                    <ul>
+                        <li><strong data-i18n="feature_minima">最小能量点分析：</strong><span data-i18n="feature_minima_text">识别音乐结构中的能量最低点，这些点通常对应音乐的分段或呼吸点</span></li>
+                        <li><strong data-i18n="feature_hierarchy">层级结构：</strong><span data-i18n="feature_hierarchy_text">通过递归分析生成多个层级的能量结构，Level 1 最细粒度，Level 越高越宏观</span></li>
+                        <li><strong data-i18n="feature_annotations">演奏特征标注：</strong><span data-i18n="feature_annotations_text">自动识别速度变化（Faster/Slower）和力度变化（Louder/Softer）</span></li>
+                        <li><strong data-i18n="feature_tempo_curve">速度曲线：</strong><span data-i18n="feature_tempo_curve_text">可视化整个演奏的速度变化趋势</span></li>
+                    </ul>
+                    <h6 class="mt-3" data-i18n="label_file_support">文件格式支持</h6>
+                    <ul>
+                        <li data-i18n="file_support_score">乐谱：MusicXML (.xml/.mxl/.musicxml) 或 MIDI (.mid/.midi)</li>
+                        <li data-i18n="file_support_alignment">对齐文件：JSON/CSV/TSV 或 ASAP .match 格式</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="modal_close">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- OSMD JS -->
+    <script src="osmd-loader.js"></script>
+    <!-- i18n -->
+    <script src="i18n.js"></script>
+    <!-- Custom JS -->
+    <script src="app_static.js"></script>
+</body>
+</html>
