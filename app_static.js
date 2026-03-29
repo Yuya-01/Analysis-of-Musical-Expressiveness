@@ -366,6 +366,12 @@ function initializeOSMD() {
 
 function setupEventListeners() {
     try {
+        // 加载按钮
+        const loadBtn = document.getElementById('loadBtn');
+        if (loadBtn) {
+            loadBtn.addEventListener('click', handleLoadData);
+        }
+
         // 曲目预设下拉
         initPiecePresetListener();
 
@@ -708,7 +714,7 @@ function prevSystem() {
 
 // ==================== 静态版本：直接从本地加载数据 ====================
 
-async function handleAnalyze() {
+async function handleLoadData() {
     const piecePresetEl = document.getElementById('piecePreset');
     const presetId = piecePresetEl?.value;
 
@@ -725,8 +731,8 @@ async function handleAnalyze() {
     if (loadingModal) loadingModal.show();
     const loadingText = document.getElementById('loadingText');
     
-    const btn = piecePresetEl;
-    btn.disabled = true;
+    const btn = document.getElementById('loadBtn');
+    if (btn) btn.disabled = true;
 
     try {
         loadingText.textContent = window.t ? window.t('loading_modal_analyzing') : '正在加载数据...';
@@ -820,7 +826,7 @@ async function handleAnalyze() {
         updateStatus(`${window.t ? window.t('status_error') : '错误'}: ${error.message}`, 'error');
         console.error('加载错误:', error);
     } finally {
-        btn.disabled = false;
+        if (btn) btn.disabled = false;
     }
 }
 

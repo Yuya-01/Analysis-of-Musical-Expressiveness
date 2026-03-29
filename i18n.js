@@ -72,6 +72,7 @@
         'btn_analyze': {zh: '开始分析', en: 'Analyze'},
         'btn_analyze_text': {zh: '开始分析', en: 'Analyze'},
         'btn_analyzing': {zh: '分析中...', en: 'Analyzing...'},
+        'btn_load': {zh: '加载数据', en: 'Load Data'},
         'btn_toggle_theme': {zh: '切换深色/浅色模式', en: 'Toggle dark/light theme'},
         'btn_fullscreen': {zh: '全屏', en: 'Fullscreen'},
         'btn_fullscreen_title': {zh: '全屏显示图表', en: 'Show chart in fullscreen'},
